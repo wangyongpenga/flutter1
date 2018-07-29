@@ -22,7 +22,7 @@ class _TodoAppPageState extends State<TodoAppPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Center(
-        child: new Text('Hello World '),
+        child: new Text('Hello World ！Todo …… '),
       ),
     );
   }
