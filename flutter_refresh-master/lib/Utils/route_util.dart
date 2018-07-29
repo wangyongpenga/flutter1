@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_refresh/widget/detail_page.dart';
+import 'package:flutter_refresh/widget/common_webview.dart';
+import 'package:flutter_refresh/Utils/fix_url_util.dart';
 
 
 class RouteUtil {
 
-  /* static route2Web(BuildContext context, String title, String url) {
+   static route2Web(BuildContext context, String title, String url) {
     if(null == url){
       return;
     }
@@ -23,7 +25,7 @@ class RouteUtil {
             ),
           );
         }));
-  }*/
+  }
 
   static route2Detail(BuildContext context, String id, String url) {
     if (null == id) {

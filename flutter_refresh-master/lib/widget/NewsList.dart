@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_refresh/widget/progreess_dialog.dart';
-import 'package:flutter_refresh/model/fl_model.dart';
-import 'package:flutter_refresh/mvp/presenter/fl_presenter.dart';
-import 'package:flutter_refresh/mvp/presenter/fl_presenter_impl.dart';
+import 'package:flutter_refresh/model/news_model.dart';
+import 'package:flutter_refresh/mvp/presenter/news_presenter.dart';
+import 'package:flutter_refresh/mvp/presenter/news_presenter_impl.dart';
 import 'package:flutter_refresh/widget/common_divider.dart';
 import 'package:flutter_refresh/common/constant.dart';
 import 'package:flutter_refresh/Utils/route_util.dart';
@@ -12,30 +12,30 @@ import 'package:flutter_refresh/Utils/route_util.dart';
 final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
 new GlobalKey<RefreshIndicatorState>();
 
-class ZhuYeAppPage extends StatefulWidget {
-  ZhuYeAppPage({Key key}) : super(key: key);
+class NewsListAppPage extends StatefulWidget {
+  NewsListAppPage({Key key}) : super(key: key);
 
   @override
-  _ZhuYeAppPageState createState() {
-    _ZhuYeAppPageState view = new _ZhuYeAppPageState();
-    FLPresenter presenter = new FLPresenterImpl(view);
+  _NewsListAppPageState createState() {
+    _NewsListAppPageState view = new _NewsListAppPageState();
+    NewsPresenter presenter = new NewsPresenterImpl(view);
     presenter.init();
     return view;
   }
 }
 
-class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
+class _NewsListAppPageState extends State<NewsListAppPage> implements NewsView {
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
   new GlobalKey<RefreshIndicatorState>();
 
   ScrollController _scrollController;
 
-  List<FLModel> datas = [];
+  List<NewsModel> datas = [];
 
-  FLPresenter _flPresenter;
+  NewsPresenter _flPresenter;
 
-  int curPageNum = 1;
+  int curPageNum = 2;
 
   bool isSlideUp = false;
 
@@ -66,7 +66,7 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
 
     final Completer<Null> completer = new Completer<Null>();
 
-    curPageNum = 1;
+    curPageNum = 2;
 
     _flPresenter.loadFLData(curPageNum, 10);
 
@@ -120,10 +120,17 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
 
 
   Widget buildCard(BuildContext context, int index) {
-    final String item = datas[index].url;
+    String item = "";
+    if (datas[index].images != null) {
+      item = datas[index].images[0];
+    }else{
+      item="http://m.china.com.cn/images/app/appicon.png";
+    }
     return new InkWell(
         onTap: () {
-          RouteUtil.route2Detail(context, '$index', '$item');
+          //RouteUtil.route2Detail(context, '$index', '$item');
+          RouteUtil.route2Web(context, datas[index].title, datas[index].artUrl);
+
         },
         child: new Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 12.0),
@@ -135,7 +142,7 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
                     children: <Widget>[
                       new Expanded(
                         child: new Text(
-                          "我是列表数据  $index,网络同步图片如右图",
+                          datas[index].title,
                           style: new TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w300),
                         ),
@@ -144,8 +151,11 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
                         padding: const EdgeInsets.all(8.0),
                         child: new SizedBox(
                           height: 80.0,
-                          width: 80.0,
-                          child: new Image.network(item),
+                          width: 100.0,
+                          child: new Image.network(item, width: 80.0,
+                            height: 70.0,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       )
                     ],
@@ -168,7 +178,7 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
   }
 
   @override
-  void onloadFLSuc(List<FLModel> list) {
+  void onloadFLSuc(List<NewsModel> list) {
     if (!mounted) return; //异步处理，防止报错
     setState(() {
       if (isSlideUp) {
@@ -180,18 +190,18 @@ class _ZhuYeAppPageState extends State<ZhuYeAppPage> implements FLView {
   }
 
   @override
-  setPresenter(FLPresenter presenter) {
+  setPresenter(NewsPresenter presenter) {
     // TODO: implement setPresenter
     _flPresenter = presenter;
   }
 }
 
-class TabGirlPage extends StatelessWidget {
+class NewsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      body: new ZhuYeAppPage(),
+      body: new NewsListAppPage(),
     );
   }
 }

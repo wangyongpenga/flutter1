@@ -6,6 +6,8 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter_refresh/widget/zhuye.dart';
 import 'package:flutter_refresh/widget/zhuye_new.dart';
 import 'package:flutter_refresh/widget/network_page.dart';
+import 'package:flutter_refresh/widget/NewsList.dart';
+import 'package:flutter_refresh/widget/todo_page.dart';
 
 
 void main() => runApp(new HomePage());
@@ -15,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new MyHomePage(title: 'Flutter学习与探索'),
+      body: new MyHomePage(title: '中国网APP（Flutter原型）'),
     );
   }
 }
@@ -36,10 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
   _initPage() {
     _body = new IndexedStack(
       children: <Widget>[
-        new ZhuYeAppPage(),
+        new NewsListAppPage(),
         new ZhuYePage(),
-        new ZhuYePage(),
-        new NetworkAppPage(),
+        new TodoAppPage(),
+        new TodoAppPage(),
       ],
       index: _curIndex,
     );
@@ -58,11 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
           new BottomNavigationBarItem(
               icon: new Icon(Icons.home), title: new Text("主页")),
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.phone_android), title: new Text("test1")),
+              icon: new Icon(Icons.phone_android), title: new Text("Tab1")),
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.phone_iphone), title: new Text("test2")),
+              icon: new Icon(Icons.phone_iphone), title: new Text("Tab2")),
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.home), title: new Text("我的")),
+              icon: new Icon(Icons.home), title: new Text("Tab2")),
         ],
         currentIndex: _curIndex,
         type: BottomNavigationBarType.fixed,
