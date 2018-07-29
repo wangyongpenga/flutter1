@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_refresh/widget/Refresh.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter_refresh/widget/zhuye.dart';
+import 'package:flutter_refresh/widget/zhuye_new.dart';
 import 'package:flutter_refresh/widget/network_page.dart';
 
 
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body:  new MyHomePage(title: 'Flutter探索'),
+      body: new MyHomePage(title: 'Flutter学习与探索'),
     );
   }
 }
@@ -23,6 +24,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
@@ -34,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _initPage() {
     _body = new IndexedStack(
       children: <Widget>[
-        new ZhuYePage(),
+        new ZhuYeAppPage(),
         new ZhuYePage(),
         new ZhuYePage(),
         new NetworkAppPage(),
@@ -50,15 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body:  _body,
+      body: _body,
       bottomNavigationBar: new BottomNavigationBar(
         items: [
           new BottomNavigationBarItem(
               icon: new Icon(Icons.home), title: new Text("主页")),
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.phone_android), title: new Text("Android")),
+              icon: new Icon(Icons.phone_android), title: new Text("test1")),
           new BottomNavigationBarItem(
-              icon: new Icon(Icons.phone_iphone), title: new Text("iOS")),
+              icon: new Icon(Icons.phone_iphone), title: new Text("test2")),
           new BottomNavigationBarItem(
               icon: new Icon(Icons.home), title: new Text("我的")),
         ],

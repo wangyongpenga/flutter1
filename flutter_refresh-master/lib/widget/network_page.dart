@@ -152,10 +152,10 @@ class _NetworkAppPageState extends State<NetworkAppPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-     /* appBar: new AppBar(
+      appBar: new AppBar(
         title: new Text('网络请求 学习'),
         centerTitle: true,
-      ),*/
+      ),
       body: new ListView(
         children: <Widget>[
           new Padding(
